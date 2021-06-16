@@ -1,0 +1,193 @@
+<div class='m-3'>
+    <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#cadastroClienteModal">Novo
+        Cliente</button>
+
+    <div class="modal fade" id="cadastroClienteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="atualiza()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <app-clientes-novo></app-clientes-novo>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+    <!--<app-clientes-lista></app-clientes-lista>-->
+
+    <div class="m-2">
+        <!--<div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <label>Informe partes da descrição:</label>
+                <input type="text" class="form-control" #busca (keyup)='0'><br />
+            </div>
+            <div class="col-6">
+                <label>Escolha uma categoria:</label>
+                <select class="form-control" #buscaCategoria (change)="0">
+                    <option value="" selected>--Selecione uma opção--</option>
+                    <option value="INFORMATICA">Informática</option>
+                    <option value="VESTUARIO">Vestuário</option>
+                    <option value="ALIMENTACAO">Alimentação</option>
+                    <option value="HIGIENE">Higiene</option>
+                    <option value="CONSTRUCAO">Construção</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de Nascimento</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Produtos</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let p of listaClientes'>
+                    <td>{{ p.nome }}</td>
+                    <td>{{ p.dataNascimento | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ p.cpf }}</td>
+                    <td>{{ p.email | lowercase }}</td>
+                    <td>{{ p.produtos }}</td>
+                    <td>
+                        <a class='btn btn-secondary' data-toggle="modal" data-target="#alteracaoClienteModal"
+                            (click)="alterarDeletarBuscaCliente(p)">
+                            <i class="fas fa-edit"></i>
+                            Alterar
+                        </a>
+                        <div class="modal fade" id="alteracaoClienteModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Alteração de Clientes</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            (click)="atualiza()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <form [formGroup]="builderForm" (ngSubmit)="alterarClientes()">
+
+                                                    <div class="form-group">
+                                                        <label>Nome</label>
+                                                        <input type="text" class="form-control" formControlName="nome"
+                                                            [ngClass]="{'is-invalid': submitted && f.nome.errors}">
+                                                        <div *ngIf="submitted && f.nome.errors" class="text-danger">
+                                                            <div *ngIf="f.nome.errors.required">O nome é obrigatório
+                                                            </div>
+                                                            <div *ngIf="f.nome.errors.minlength">O nome deve ter no
+                                                                mínimo 2 caracteres</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Data de Nascimento</label>
+                                                        <input type="date" class="form-control"
+                                                            formControlName="dataNascimento"
+                                                            [ngClass]="{'is-invalid': submitted && f.dataNascimento.errors}">
+                                                        <div *ngIf="submitted && f.dataNascimento.errors"
+                                                            class="text-danger">
+                                                            <div *ngIf="f.dataNascimento.errors.required">A Data de
+                                                                nascimento é obrigatória</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>CPF</label>
+                                                        <input type="text" class="form-control" formControlName="cpf"
+                                                            [ngClass]="{'is-invalid': submitted && f.cpf.errors}">
+                                                        <div *ngIf="submitted && f.cpf.errors" class="text-danger">
+                                                            <div *ngIf="f.cpf.errors.required">O preço é obrigatório
+                                                            </div>
+                                                            <div *ngIf="f.cpf.errors.min">O preço deve ser maior que
+                                                                zero</div>
+                                                            <div *ngIf="f.cpf.errors.minlength">O CPF deve ter no mínimo
+                                                                11 caracteres</div>
+                                                            <div *ngIf="f.cpf.errors.maxlength">O CPF deve ter no máximo
+                                                                11 caracteres</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>E-mail</label>
+                                                        <input type="text" class="form-control" formControlName="email"
+                                                            [ngClass]="{'is-invalid': submitted && f.email.errors}">
+                                                        <div *ngIf="submitted && f.email.errors" class="text-danger">
+                                                            <div *ngIf="f.email.errors.email">O campo precisa conter um
+                                                                e-mail válido</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Produtos</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="produtos">
+                                                        <!--    [ngClass]="{'is-invalid': submitted && f.produtos.errors}">
+                                                        <div *ngIf="submitted && f.produtos.errors" class="text-danger">
+                                                            <div *ngIf="f.produtos.errors.required">O produto é obrigatório</div>
+                                                        </div>-->
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary"
+                                                        data-dismiss="modal">Alterar
+                                                        Cliente</button>
+                                                    <button type="reset" class="btn btn-secondary m-2"
+                                                        (click)="limpar()">Limpar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class='btn btn-danger ml-2' data-toggle="modal" data-target="#remocaoClienteModal"
+                            (click)="alterarDeletarBuscaCliente(p)">
+                            <i class="fas fa-trash-alt"></i>
+                            Excluir
+                        </a>
+                        <div class="modal fade" id="remocaoClienteModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Deseja mesmo excluir esse item?
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            (click)="atualiza()">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <button class='btn btn-danger m-2' data-dismiss="modal"
+                                                    (click)="excluirCliente()">Sim</button>
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Não</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

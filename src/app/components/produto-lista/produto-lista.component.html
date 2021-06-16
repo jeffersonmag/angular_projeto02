@@ -1,0 +1,52 @@
+<div class="m-2">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <label>Informe partes da descrição:</label>
+                <input type="text" class="form-control" #busca (keyup)='0'><br />
+            </div>
+            <div class="col-6">
+                <label>Escolha uma categoria:</label>
+                <select class="form-control" #buscaCategoria (change)="0">
+                    <option value="" selected>--Selecione uma opção--</option>
+                    <option value="INFORMATICA">Informática</option>
+                    <option value="VESTUARIO">Vestuário</option>
+                    <option value="ALIMENTACAO">Alimentação</option>
+                    <option value="HIGIENE">Higiene</option>
+                    <option value="CONSTRUCAO">Construção</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Unidade</th>
+                <th>Preço</th>
+                <th>Categoria</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let p of listaProdutos | subLista:busca.value | categoria:buscaCategoria.value'>
+                <td>{{ p.codigo }}</td>
+                <td>{{ p.descricao | uppercase }}</td>
+                <td>{{ p.unidade | uppercase | simbolo }}</td>
+                <td>{{ p.preco | currency:'BRL' }} -> {{ p.preco | desconto:5 | currency:'BRL' }}</td>
+                <td>{{ p.categoria }}</td>
+                <td>
+                    <a routerLink="/produtos/alteracao/{{p._id}}" class='btn btn-secondary'>
+                        <i class="fas fa-edit"></i>
+                        Alterar
+                    </a>
+                    <a routerLink="/produtos/remocao/{{p._id}}" class='btn btn-danger ml-2'>
+                        <i class="fas fa-trash-alt"></i>
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

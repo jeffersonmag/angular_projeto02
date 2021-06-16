@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-10">
+        <form [formGroup]="builderForm" (ngSubmit)="incluirClientes()">
+
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" formControlName="nome"
+                    [ngClass]="{'is-invalid': submitted && f.nome.errors}">
+                <div *ngIf="submitted && f.nome.errors" class="text-danger">
+                    <div *ngIf="f.nome.errors.required">O nome é obrigatório</div>
+                    <div *ngIf="f.nome.errors.minlength">O nome deve ter no mínimo 2 caracteres</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Data de Nascimento</label>
+                <input type="date" class="form-control" formControlName="dataNascimento"
+                    [ngClass]="{'is-invalid': submitted && f.dataNascimento.errors}">
+                <div *ngIf="submitted && f.dataNascimento.errors" class="text-danger">
+                    <div *ngIf="f.dataNascimento.errors.required">A Data de nascimento é obrigatória</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>CPF</label>
+                <input type="text" class="form-control" formControlName="cpf"
+                    [ngClass]="{'is-invalid': submitted && f.cpf.errors}">
+                <div *ngIf="submitted && f.cpf.errors" class="text-danger">
+                    <div *ngIf="f.cpf.errors.required">O preço é obrigatório</div>
+                    <div *ngIf="f.cpf.errors.min">O preço deve ser maior que zero</div>
+                    <div *ngIf="f.cpf.errors.minlength">O CPF deve ter no mínimo 11 caracteres</div>
+                    <div *ngIf="f.cpf.errors.maxlength">O CPF deve ter no máximo 11 caracteres</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="text" class="form-control" formControlName="email"
+                    [ngClass]="{'is-invalid': submitted && f.email.errors}">
+                <div *ngIf="submitted && f.email.errors" class="text-danger">
+                    <div *ngIf="f.email.errors.email">O campo precisa conter um e-mail válido</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Produtos</label>
+                <input type="text" class="form-control" formControlName="produtos">
+                <!--    [ngClass]="{'is-invalid': submitted && f.produtos.errors}">
+                <div *ngIf="submitted && f.produtos.errors" class="text-danger">
+                    <div *ngIf="f.produtos.errors.required">O produto é obrigatório</div>
+                </div>-->
+            </div>
+
+            <button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="incluirClientes()">Incluir Cliente</button>
+            <button type="reset" class="btn btn-secondary m-2" (click)="limpar()">Limpar</button>
+        </form>
+    </div>
+</div>

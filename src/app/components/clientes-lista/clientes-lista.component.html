@@ -1,0 +1,87 @@
+<div class="m-2">
+    <!--<div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <label>Informe partes da descrição:</label>
+                <input type="text" class="form-control" #busca (keyup)='0'><br />
+            </div>
+            <div class="col-6">
+                <label>Escolha uma categoria:</label>
+                <select class="form-control" #buscaCategoria (change)="0">
+                    <option value="" selected>--Selecione uma opção--</option>
+                    <option value="INFORMATICA">Informática</option>
+                    <option value="VESTUARIO">Vestuário</option>
+                    <option value="ALIMENTACAO">Alimentação</option>
+                    <option value="HIGIENE">Higiene</option>
+                    <option value="CONSTRUCAO">Construção</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de Nascimento</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Produtos</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let p of listaClientes'>
+                <td>{{ p.nome }}</td>
+                <td>{{ p.dataNascimento | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ p.cpf }}</td>
+                <td>{{ p.email | lowercase }}</td>
+                <td>{{ p.produtos }}</td>
+                <td>
+                    <a class='btn btn-secondary' data-toggle="modal" data-target="#alteracaoClienteModal" data-whatever="p._id">
+                        <i class="fas fa-edit"></i>
+                        Alterar
+                    </a>
+                    <div class="modal fade" id="alteracaoClienteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Alteração de Clientes</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="atualiza()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <app-clientes-alteracao></app-clientes-alteracao>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a routerLink="/clientes/alteracao/{{p._id}}" class='btn btn-danger ml-2' data-toggle="modal" data-target="#remocaoClienteModal">
+                        <i class="fas fa-trash-alt"></i>
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="modal fade" id="remocaoClienteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Exclusão de Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="atualiza()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-clientes-remocao></app-clientes-remocao>
+            </div>
+        </div>
+    </div>
+</div>
+
