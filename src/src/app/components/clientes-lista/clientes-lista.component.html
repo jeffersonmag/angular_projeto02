@@ -1,0 +1,55 @@
+<div class="m-2">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome</th>
+                <th>Data Nasc.</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let c of listaClientes">
+                <td>{{c.cpf}}</td>
+                <td>{{c.nome}}</td>
+                <td>{{c.dataNascimento | date:'dd/MM/yyyy' }}</td>
+                <td>{{c.email}}</td>
+                <td>
+                    <a class="btn btn-secondary">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#removeCliente">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="removeCliente" tabindex="-1" aria-labelledby="removeClienteLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form [formGroup]="builderForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="removeClienteLabel">Novo Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h3 class="text-danger">Tem certeza que deseja remover este cliente?</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger" (click)="removerCliente()" data-dismiss="modal">Sim, remover</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+    </div>
+    

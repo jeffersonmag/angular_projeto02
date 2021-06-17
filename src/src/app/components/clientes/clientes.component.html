@@ -1,0 +1,62 @@
+<div class="m-3">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novoCliente">Novo Cliente</button>
+    | <a routerLink="/clientes/produtos">Ver produtos por clientes</a>
+    <hr />
+    <app-clientes-lista [listaClientes]="clientes"></app-clientes-lista>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="novoCliente" tabindex="-1" aria-labelledby="novoClienteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form [formGroup]="builderForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="novoClienteLabel">Novo Cliente</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                                <div class="form-group">
+                                        <label>Cpf:</label>
+                                        <input type="text" class="form-control" formControlName="cpf">
+                                    </div>                            
+                                    <div class="form-group">
+                                            <label>Nome:</label>
+                                            <input type="text" class="form-control" formControlName="nome">
+                                        </div>                            
+    
+                                    <div class="form-group">
+                                            <label>Data Nasc.:</label>
+                                            <input type="date" class="form-control" formControlName="dataNascimento">
+                                        </div>                            
+                                        <div class="form-group">
+                                                <label>email:</label>
+                                                <input type="email" class="form-control" formControlName="email">
+                                            </div>                            
+            
+                        </div>
+                        <div class="col-6">
+                                <div class="form-group">
+                                        <label>Produtos para este cliente:</label>
+                                        <select class="form-control" multiple="multiple" formControlName="produtos" style="height:100%;">
+                                            <optgroup label="Selecione"></optgroup>
+                                            <option *ngFor="let p of produtos" [value]="p.codigo">{{p.descricao}}</option>
+                                        </select>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="incluirCliente()" data-dismiss="modal">Save changes</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

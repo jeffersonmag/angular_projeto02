@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">Avanade</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/sobre">Resumo das Atividades</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/produtos">Produtos</a>
+        </li>  
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/clientes">Clientes</a>
+        </li>                
+      </ul>
+
+      <ul class="navbar-nav mr-5">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/login">{{usuario}}</a>
+          </li>
+          <li class="nav-item">
+              <button class="btn btn-primary" (click)="executar(usuario)">Log off</button>
+          </li>
+
+      </ul>
+
+    </div>
+  </nav>

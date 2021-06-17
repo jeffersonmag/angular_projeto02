@@ -1,0 +1,35 @@
+<div class="m-3 row">
+    <div class="col-6">
+        <div class="form-group">
+            <label>Selecionar um cliente</label>
+            <select class="form-control" #item (change)="0">
+                <option value="">---SELECIONE---</option>
+                <option *ngFor="let c of clientes" [value]="c.produtos">{{c.nome}}</option>
+            </select>
+        </div>
+    </div>
+    <hr />
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Unidade</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let p of produtos  | produtosCliente:item.value">
+            <td>{{p.codigo}}</td>
+            <td>{{p.descricao}}</td>
+            <td>{{p.unidade}}</td>
+            <td>{{p.preco}}</td>
+            <td>{{p.categoria}}</td>
+
+        </tr>
+    </tbody>
+</table>

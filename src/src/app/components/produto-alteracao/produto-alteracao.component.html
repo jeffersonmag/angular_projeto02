@@ -1,0 +1,85 @@
+<div class="m-3">
+    <div class="row">
+        <div class="col-6">
+            <h1>Alteração de Produtos</h1>
+            <form [formGroup]="builderForm" (ngSubmit)="alterarProduto()">
+
+                <!-- <input type="hidden" formControlName="_id"> -->
+
+                <div class="form-group">
+                    <label>Id:</label>
+                    <input type="text" class="form-control" formControlName="_id" readonly="readonly">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Código:</label>
+                    <input type="number" class="form-control" formControlName="codigo"
+                        [ngClass]="{'is-invalid': submitted && f.codigo.errors}">
+
+                    <div *ngIf="submitted && f.codigo.errors" class="text-danger">
+                        <div *ngIf="f.codigo.errors.required">O código é obrigatório</div>
+                        <div *ngIf="f.codigo.errors.min">O código deve ser no minimo 1</div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <input type="text" class="form-control" formControlName="descricao"
+                        [ngClass]="{'is-invalid': submitted && f.descricao.errors}">
+
+                    <div *ngIf="submitted && f.descricao.errors" class="text-danger">
+                        <div *ngIf="f.descricao.errors.required">A descrição é obrigatória</div>
+                        <div *ngIf="f.descricao.errors.minlength">A descrição deve ter no minimo 3 caracteres</div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Unidade:</label>
+                    <input type="text" class="form-control" formControlName="unidade"
+                        [ngClass]="{'is-invalid': submitted && f.unidade.errors}">
+                    <div *ngIf="submitted && f.unidade.errors" class="text-danger">
+                        <div *ngIf="f.unidade.errors.required">A unidade é obrigatória</div>
+                        <div *ngIf="f.unidade.errors.minlength || f.unidade.errors.maxlength">
+                            A unidade deve ter entre 2 e 5 caracteres</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Preço:</label>
+                    <input type="text" class="form-control" formControlName="preco"
+                        [ngClass]="{'is-invalid': submitted && f.preco.errors}">
+                    <div *ngIf="submitted && f.preco.errors" class="text-danger">
+                        <div *ngIf="f.preco.errors.required">O preço é obrigatório</div>
+                        <div *ngIf="f.preco.errors.min">O preço deve ser positivo</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Categoria:</label>
+                    <select class="form-control" formControlName="categoria"
+                        [ngClass]="{'is-invalid': submitted && f.categoria.errors}">
+
+                        <option value="" selected>---SELECIONE A CATEGORIA---</option>
+                        <option value="INFORMATICA">Informática</option>
+                        <option value="VESTUARIO">Vestuário</option>
+                        <option value="ALIMENTACAO">Alimentação</option>
+                        <option value="HIGIENE">Higiene</option>
+                        <option value="CONSTRUCAO">Construção</option>
+                    </select>
+                    <div *ngIf="submitted && f.categoria.errors" class="text-danger">
+                        <div *ngIf="f.categoria.errors.required">A categoria deve ser informada</div>
+                        <!-- <div *ngIf="f.categoria.errors.minlength">A categoria não foi selecionada</div> -->
+                    </div>
+                </div>
+                <!-- <button type="submit" class="btn btn-primary" [disabled]="!builderForm.valid">Incluir Produto</button> -->
+                <button type="submit" class="btn btn-primary">Alterar Produto</button>
+                <button type="button" class="btn btn-secondary ml-2" (click)="cancelar()">Cancelar</button>
+                <button type="reset" class="btn btn-secondary ml-2" (click)="limpar()">Limpar</button>
+            </form>
+        </div>
+    </div>
+</div>

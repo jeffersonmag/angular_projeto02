@@ -1,0 +1,11 @@
+<div class="m-3">
+    <h3 class="text-danger">Tem certeza que deseja remover este produto?</h3>
+    <h2>
+        {{produto.descricao}}
+    </h2>
+    <div>
+        <button (click)="cancelar()" class="btn btn-default">Não, voltar para a lista</button> |
+        <button (click)="remover()" class="btn btn-danger">Sim, remover</button>
+
+    </div>
+</div>
